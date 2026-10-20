@@ -846,7 +846,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
         <span class="sb-r">
           <span id="sbNet">3G</span>
           <span>▮▮▮</span>
-          <span id="sbTime">오후 11:48</span>
+          <span id="sbTime">오후 11:36</span>
         </span>
       </div>
       <div id="viewport" class="screen-inner"></div>
@@ -919,31 +919,31 @@ const smsInbox2009 = [
 
 const callLog2009 = [
   { name: "지원", detail: "발신 · 오후 6:02", trigger: true },
-  { name: "016-3456-7890", detail: "수신 · 오후 3:01" },
+  { name: "017-1234-5678", detail: "수신 · 오후 3:01" },
   { name: "엄마", detail: "부재중 · 12월 1일" },
   { name: "지원", detail: "수신 · 8월 29일", trigger: false }
 ];
 
 const callLog2016 = [
-  { name: "지원", detail: "발신 · 11월 19일", main: true },
-  { name: "엄마", detail: "부재중 · 11월 18일" },
-  { name: "번호정보 없음", detail: "수신 · 11월 18일" },
-  { name: "지원", detail: "수신 · 11월 18일", main: false },
-  { name: "지원", detail: "발신 · 11월 17일" },
-  { name: "02-5678-1234", detail: "수신 · 11월 16일" },
-  { name: "010-1357-2468", detail: "수신 · 11월 16일" }, 
-  { name: "지원", detail: "발신 · 11월 14일" }, 
-  { name: "번호정보 없음", detail: "수신 · 11월 11일" }
+  { name: "지원", detail: "발신 · 12월 3일", main: true },
+  { name: "엄마", detail: "부재중 · 12월 2일" },
+  { name: "번호정보 없음", detail: "수신 · 12월 2일" },
+  { name: "지원", detail: "수신 · 12월 2일", main: false },
+  { name: "지원", detail: "발신 · 12월 1일" },
+  { name: "02-5678-1234", detail: "수신 · 11월 30일" },
+  { name: "010-1357-2468", detail: "수신 · 11월 30일" }, 
+  { name: "지원", detail: "발신 · 11월 28일" }, 
+  { name: "번호정보 없음", detail: "수신 · 11월 25일" }
 ];
 
 const kakaoJiwon = [
-  { from: "date", text: "2016년 11월 18일 금요일" }, 
+  { from: "date", text: "2016년 12월 2일 금요일" }, 
   { from: "in", text: "우리 내일 영화 몇 시더라?" },
   { from: "out", text: "3시 40분" },
   { from: "in", text: "그러면 3시에 데리러 갈게" },
   { from: "in", text: "집 앞에서 기다려" },
   { from: "out", text: "엉"}, 
-  { from: "date", text: "2016년 11월 19일 토요일" },
+  { from: "date", text: "2016년 12월 3일 토요일" },
   { from: "in", text: "너 딴 데 돌아다니면 진짜 죽어" }, 
   { from: "in", text: "내일 보는거다" },
   { from: "date", text: "2017년 10월 27일 금요일" }, 
@@ -1027,6 +1027,8 @@ function setEra(y) {
   document.querySelector(".anycall").classList.toggle("era16", y === 2016);
   soft2009.style.display = y === 2009 ? "flex" : "none";
   sbNet.textContent = y === 2009 ? "3G" : "LTE";
+  document.getElementById( "sbTime" ).textContent = y === 2009 ? "11:36" : "07:48";
+
   hintEl.textContent =
     y === 2009 ? "2009 애니콜 — 전화·문자" : "2016 — 전화·문자·카톡·인스타·갤러리·음악";
 }
@@ -1074,7 +1076,7 @@ function naturalTo2016() {
 function renderLock() {
   vp.innerHTML = `
     <div class="standby fade">
-      <div class="big">11:48</div>
+      <div class="big">11:36</div>
       <div class="sub">12월 31일 목요일</div>
       <div class="slide-unlock">
         <div class="slide-track" id="slideTrack">
@@ -1136,7 +1138,7 @@ function renderHome2009() {
     </button>`).join("");
   vp.innerHTML = `
     <div class="tw-home fade">
-      <div class="tw-clock">11:48</div>
+      <div class="tw-clock">11:36</div>
       <div class="tw-date">12월 31일 목요일</div>
       <div class="tw-grid">
         <button type="button" class="tw-app" data-go="phone"><span class="ico ico-tel">☎</span>전화</button>
@@ -1284,22 +1286,22 @@ function renderSmsList2016() {
         <button type="button" class="s16-row" id="openGroup">
           <span class="s16-av" style="background:#e8935a">작</span>
           <span class="s16-txt"><span class="name">작대기 <small>4</small></span><span class="prev">저도요</span></span>
-          <span class="s16-meta">11월 19일</span>
+          <span class="s16-meta">12월 3일</span>
         </button>
         <div class="s16-row dim">
           <span class="s16-av" style="background:#7a9bd6">S</span>
           <span class="s16-txt"><span class="name">SKT</span><span class="prev">요금 안내</span></span>
-          <span class="s16-meta">11월 15일</span>
+          <span class="s16-meta">11월 25일</span>
         </div>
       <div class="s16-row dim">
           <span class="s16-av" style="background:#AF79E2">아</span>
           <span class="s16-txt"><span class="name">아빠</span><span class="prev">주말에 밥 먹으러 와~</span></span>
-          <span class="s16-meta">11월 15일</span>
+          <span class="s16-meta">11월 24일</span>
         </div>
         <div class="s16-row dim">
           <span class="s16-av" style="background:#26AB64">0</span>
           <span class="s16-txt"><span class="name">010-2580-1357</span><span class="prev">[CJ 대한통운]</span></span>
-          <span class="s16-meta">11월 9일</span>
+          <span class="s16-meta">11월 21일</span>
         </div>
 
 
