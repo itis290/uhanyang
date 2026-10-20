@@ -773,56 +773,96 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     height: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
-    background: #000000 !important; /* 남는 주변 공간은 검은색 레터박스로 처리 */
-    overflow: hidden !important;     /* 불필요한 스크롤 절대 방지 */
-  }
-
-  body {
-    display: grid !important;
-    place-items: center !important;  /* 스마트폰 화면 정중앙에 목업 배치 */
+    background: #000000 !important; /* 남는 주변 공간은 검은색 처리 */
+    overflow-x: hidden; !important;              /* 좌우 스크롤 방지 */
+    touch-action: none !important;
+    position: fixed !important;
+}
+body {
+    positon: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 338px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;  /* 상하 중앙 정렬 */
+    min-height: 100vh !important;
+   -webkit-text-size-adjust: none !important;
+   -moz-text-size-adjust: none !important;
+   -ms-text-size-adjust: none !important;
+   text-size-adjust: none !important;
   }
 
   #wrap {
     padding: 0 !important;
     margin: 0 !important;
-    width: 318px !important;         /* 원본 가로폭 고정 */
-    height: 590px !important;        /* 스피커+액정+물리버튼을 포함한 전체 원본 높이 고정 */
-    position: relative !important;
-    
-    /* 📌 핵심: 핸드폰 화면 크기에 맞춰 가로세로 비율을 깨지 않고 통째로 확대/축소 */
-    transform: min(calc(100vw / 318), calc(100vh / 590)) !important;
-    transform-origin: center center !important;
+    /* 📌 양옆 테두리 두께(약 20px)를 고려해 전체 가로폭 규격을 338px로 확장 */
+    width: 338px !important; 
+    display: flex !important;
+    justify-content: center !important;
   }
 
-  /* 모바일 화면에서 양옆 플라스틱 테두리 선만 깔끔하게 제거 */
+  /* 바깥쪽 핸드폰 프레임: 원본의 양옆 테두리와 그라데이션 복원 */
   .anycall, .anycall.era16 {
-    width: 318px !important;
-    padding: 10px 0 8px 0 !important; /* 양옆 패딩 제거 */
-    border-radius: 0 !important;
-    box-shadow: none !important;
+    width: 338px !important; 
+    padding: 10px 10px 8px 10px !important; /* 📌 양옆 10px 패딩을 복원하여 테두리 생성 */
+    border-radius: 22px !important;          /* 📌 둥근 모서리 복원 */
+    box-shadow: 0 22px 48px #0007 !important; /* 입체감 주는 그림자 복원 */
     border: none !important;
     background: linear-gradient(165deg, #1a1a1a, #050505 40%, #222) !important;
+    display: flex !important;
+    flex-direction: column !important;
   }
 
+  /* 2016 갤럭시 모드일 때 메탈 실버 테두리 및 둥근 마감 복원 */
   .anycall.era16 {
-    padding: 16px 0 10px 0 !important;
+    padding: 16px 10px 10px 10px !important;
+    border-radius: 34px !important;
     background: linear-gradient(160deg, #e9eaec, #c3c6ca 45%, #a6a9ae 100%) !important;
+    box-shadow: 0 22px 48px #0007, inset 0 0 0 1px #fff8, inset 0 0 0 3px #9b9ea3 !important;
   }
 
-  /* 내부 액정 영역 원본 크기 절대 고정 */
+  /* 상단 스피커 및 브랜드 로고 크기 고정 */
+  .anycall-speaker {
+    width: 48px !important;
+    height: 5px !important;
+    margin: 0 auto 8px !important;
+  }
+  .anycall.era16 .anycall-speaker {
+    width: 44px !important;
+    height: 4px !important;
+    margin-bottom: 4px !important;
+  }
+  .hw-topbrand {
+    font-size: 9px !important;
+    letter-spacing: 2.5px !important;
+    margin-bottom: 7px !important;
+  }
+
+  /* 내부 스크린 영역: 원본 크기(318x502)와 비율을 완벽하게 수치 고정 */
   .screen {
     width: 318px !important;
     height: 502px !important;
     min-height: 502px !important;
     max-height: 502px !important;
-    border-left: none !important;
-    border-right: none !important;
-    border-radius: 0 !important;
+    border: 2px solid #000 !important; /* 📌 액정 외곽선 복원 */
+    border-radius: 6px !important;
+  }
+  .anycall.era16 .screen {
+    border-radius: 3px !important;
   }
 
-  /* 하단 물리 버튼 영역 고정 */
+  /* 하단 물리 버튼 영역 및 크기 복원 */
   .hw-keys {
     width: 318px !important;
+    margin-top: 8px !important;
+  }
+  .anycall.era16 .hw-keys {
+    margin-top: 10px !important;
+  }
+  .hw-brand {
+    font-size: 11px !important;
   }
   .hw-row {
     padding: 0 6px !important;
@@ -830,6 +870,12 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   .anycall.era16 .hw-row {
     padding: 0 24px !important;
   }
+
+  /* SVG 물리 버튼 크기 원본 고정 */
+  .hw-call svg, .hw-end svg { width: 54px !important; height: 26px !important; }
+  .hw-diamond svg { width: 92px !important; height: 34px !important; }
+  .anycall.era16 .hw-diamond .s16 { width: 70px !important; height: 22px !important; }
+  .anycall.era16 .hw-call svg.s16, .anycall.era16 .hw-end svg.s16 { width: 22px !important; height: 18px !important; }
 }
 
 
